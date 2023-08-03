@@ -25,7 +25,7 @@ def save_state(algorithm):
     # save only every 1000th evaluation
     if algorithm.nfe % 100 == 0:
         states.append([s.objectives for s in algorithm.population])
-        print(f"Saved state at evaluation {algorithm.nfe}, total states: {len(states)}")
+        # print(f"Saved state at evaluation {algorithm.nfe}, total states: {len(states)}")
 
 
 # attach callback to the algorithm
@@ -37,7 +37,8 @@ count = 0
 while count < 10000:
     algorithm.step()
     save_state(algorithm)
-    count += 100
+    # CAHNGE THE VALUE WHICH ALGORITHM IS RUNNING
+    count += 10
 
 # setup the plot1
 fig1 = plt.figure(figsize=(10, 6))
@@ -61,6 +62,8 @@ ani = FuncAnimation(fig1, animate1, frames=len(states), interval=50, repeat=Fals
 # save the animation as a gif file
 ani.save(f'{algorithm.__class__.__name__ }-1.gif', writer='pillow')
 
+print(f'Animation 1 done for {algorithm.__class__.__name__ } algorithm. States at {len(states)} evaluations')
+
 # setup the plot1
 fig2 = plt.figure(figsize=(10, 6))
 ax2 = fig2.add_subplot(111, projection='3d')
@@ -81,3 +84,5 @@ ani = FuncAnimation(fig2, animate2, frames=len(states), interval=50, repeat=Fals
 
 # save the animation as a gif file
 ani.save(f'{algorithm.__class__.__name__ }-2.gif', writer='pillow')
+
+print(f'Animation 2 done for {algorithm.__class__.__name__ } algorithm. States at {len(states)} evaluations')
